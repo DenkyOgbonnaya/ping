@@ -1,34 +1,33 @@
 import React, {useContext} from 'react';
 import { ChatContext } from '../../context/chatContext';
 import { setRoomSelected } from '../../actions/chatActions';
+import Pane from './pane';
+import SearchField from './searchField';
+import ChatList from '../chat/chatList';
 
 const SideNav = () => {
-    const{chatData, dispatchChat} = useContext(ChatContext)
+    const{chatData, dispatchChat} = useContext(ChatContext);
+
+    const setChatSelected = (chat) => {
+        setRoomSelected(chat, dispatchChat);
+    }
     return(
     <div className='sidenav' > 
-        <ul> 
-            {
-                chatData.chatRooms.map((room, i) => 
-                    <li key={i} onClick = {e => setRoomSelected(room, dispatchChat)} >{room} </li>
-                )
+        <Pane title='Denky' img='/static/defavatar.png' />
+        <SearchField />
+        <ChatList 
+            chatList = {chatData.chatRooms} 
+            setChatSelected = {setChatSelected}
+            />
+        <style jsx>{`
+            .sidenav {
+                padding: 5px;
+                background: #0048AA;
+                border-radius:0px 0 0 10px;
+                height:100vh;
+                color: #fafafa;
             }
-        </ul>
-        < style jsx>{`
-        .sidenav {
-            background: #212121;
-            color: #ccc;
-            height: 100vh
-        }
-        ul {
-            list-style: none
-        }
-        ul li {
-            border: 1px solid #ccc
-        }
-        ul li :hover {
-            background: grey
-        }
-        `} </style>
+        `}</style>
     </div>
     )
 }

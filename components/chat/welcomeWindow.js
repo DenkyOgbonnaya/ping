@@ -1,18 +1,17 @@
 import React from 'react';
+import HeaderPane from '../includes/headerPane';
 
 const WelcomeWindow = () => {
     return(
         <div> 
-            <h1> CHAT UP </h1>
+            <HeaderPane title='CHAT UP' />
             <p>Welcome to Chatup instant messanger!. Join a room to start ChattIng. </p>
 
             <style jsx>{`
-                h1 {
-                    text-align: center
-                }
                 p {
                     text-align: center;
-                    margin-top: 30%
+                    margin-top: 30%;
+                    color:#424242;
                 }
             `}</style>
         </div>
