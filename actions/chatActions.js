@@ -6,3 +6,8 @@ export const setRoomSelected = (room, dispatch) => {
         room: rooms[room]
     })
 }
+export const toggleIsVisibleSidebar = (dispatch) => {
+    dispatch({
+        type: 'TOGGLE_ISVISIBLE_SIDEBAR',
+    })
+}

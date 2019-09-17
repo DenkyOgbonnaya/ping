@@ -1,17 +1,26 @@
-import { styles } from "ansi-colors";
+import React, {useContext} from 'react';
+import { ChatContext } from '../../context/chatContext';
+import { setRoomSelected, toggleIsVisibleSidebar } from '../../actions/chatActions';
 
-const ChatList = ({chatList, setChatSelected}) => {
+const ChatList = () => {
+    const{chatData, dispatchChat} = useContext(ChatContext);
+    const{chatRooms} = chatData;
+
+    const handleChatClicked = chatroom => {
+        setRoomSelected(chatroom, dispatchChat);
+        toggleIsVisibleSidebar(dispatchChat);
+    }
     return(
         <div> 
             <ul className='nav flex-column nav-pills' > 
             {
-                chatList.map((chat, i) => 
+                chatRooms.map((chatroom, i) => 
                     <div key={i}>
                     <li 
                         className='nav-item' 
-                        onClick = {e => setChatSelected(chat)} >
+                        onClick = {e => handleChatClicked(chatroom)} >
                         <img src='static/defavatar.png' alt='pIX' /> {" "}
-                        {chat} 
+                        {chatroom} 
                     </li>
                     <hr />
                     </div>

@@ -6,6 +6,11 @@ const chatReducer = (state, action) => {
                 selectedRoom: action.room,
                 isRoomSelected: true
         }
+        case 'TOGGLE_ISVISIBLE_SIDEBAR':
+            return {
+                ...state,
+                isVisibleSidebar: !state.isVisibleSidebar
+            }
         default: return state;
         
     }

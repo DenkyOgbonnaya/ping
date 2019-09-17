@@ -7,7 +7,7 @@ const ChatContextProvider = (props) => {
     const[chatData, dispatchChat] = useReducer(chatReducer, {
         chatRooms: ['Php', 'JavaScripters', 'Python'],
         isRoomSelected: false,
-        isVisibleSidebar: true,
+        isVisibleSidebar: false,
         selectedRoom: {
             name: 'JavaScripters',
             members: ['Denky', 'Dennis', 'James'],

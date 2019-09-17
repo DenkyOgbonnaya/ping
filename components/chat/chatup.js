@@ -12,7 +12,7 @@ const Chatup = () => {
     return (
         <div className='wrapper' > 
             
-            <div className= {isVisibleSidebar ? 'sidebar-visible': 'sidebar-hidden'}>  <SideNav /> </div>
+            <div className= {isVisibleSidebar ? 'sidebar-visible' : 'sidebar-hidden'} id='sidebar'>  <SideNav /> </div>
             <div className='main' > <Main /> </div>
                 
             <style jsx >{`
@@ -23,13 +23,26 @@ const Chatup = () => {
                     overflow: hidden;
                     background: #fafafa;
                 }
-                .sidebar-visible {
+                .sidebar-hidden {
                     flex: 0;
                     flex-basis:0;
-                    width: 0px
+                    width: 0px;
+                    transition: 0.5s;
+                }
+                .sidebar-visible {
+                    flex-basis: 100%;
+                    margin-right: 0px;
+                    border: 1px solid black;
+                    background-color: #15191b;
+                    color: #ccc;
+                    z-index: 2;
+                    position: -webkit-sticky;
+                    position: sticky;
+                    top: 0;
+                    transition: 0.5s;
                 }
                 .main{
-                    flex: 5;
+                    flex: 2;
                     background: #ffffff;
                     width: 100%;
                     padding: 5px;
@@ -39,18 +52,13 @@ const Chatup = () => {
                   
                 }
                 @media (min-width: 768px) {
-                    .sidebar-visible {
+                    #sidebar {
                         flex-basis: 257px;
                         position: -webkit-sticky;
                         position: sticky;
                         top: 0;
-                        border: 1px solid black;
-                        padding: 1px;
-                        background-color: #15191b;
-                        color: #ccc;
-                        z-index: 2;
                         overflow-y: hidden;
-                        transition: 0.5s;
+                        
                     }
                   }
             `}</style>
