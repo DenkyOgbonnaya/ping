@@ -3,6 +3,7 @@ import React, {useEffect, useContext} from 'react';
 import {AuthContext} from '../context/authContext';
 import Chatup from '../components/chat/chatup';
 import Router from 'next/router';
+import Spinner from '../components/includes/spinner';
 
 
 const App = () => {
@@ -17,7 +18,11 @@ const App = () => {
     }, [])
     return(
         <div className="app">
-            <Chatup />
+            {
+                authData.isAuthenticated ?
+                <Chatup /> :
+                <Spinner />
+            }
         </div>
     )
 
