@@ -1,22 +1,26 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import JoinWindow from './joinWindow';
 import ChatWindow from './chatWindow';
-import { ChatContext } from "../../context/chatContext";
-import { AuthContext } from "../../context/authContext";
+import useChatConText from '../lib/useChatContext';
+import useAuthContext from '../lib/useAuthContext';
 
 const Chatroom = () => {
-    const{chatData} = useContext(ChatContext);
-    const{authData} = useContext(AuthContext);
+    const{chatData} = useChatConText();
+    const{authData} = useAuthContext();
 
     const{selectedRoom} = chatData;
-    const{currentUser} = authData;
+    const{nickname} = authData;
 
-    if(selectedRoom && selectedRoom.members.includes(currentUser.nickname))
+    if(selectedRoom && selectedRoom.members.includes(nickname))
         return (
             <ChatWindow />
         )
     return(
-        <JoinWindow room = {selectedRoom.name} participants={selectedRoom.members.length} />
+        <JoinWindow 
+            room = {selectedRoom.name} 
+            participants = {selectedRoom.members.length}
+            description = {selectedRoom.description}
+         />
     )
 }
 

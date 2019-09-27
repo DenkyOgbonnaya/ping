@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import WelcomeWindow from './welcomeWindow';
 import Chatroom from './chatroom';
-import { ChatContext } from '../../context/chatContext';
+import useChatConText from '../lib/useChatContext';
 
 const Main = () => {
-    const{chatData} = useContext(ChatContext);
+    const{chatData} = useChatConText();
 
    return chatData.isRoomSelected ? <Chatroom /> : <WelcomeWindow />
 }

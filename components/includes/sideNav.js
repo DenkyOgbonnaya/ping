@@ -1,13 +1,14 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import Pane from './pane';
 import SearchField from './searchField';
 import ChatList from '../chat/chatList';
+import useAuthConText from '../lib/useAuthContext';
 
 const SideNav = () => {
-    
+    const {nickname} = useAuthConText().authData;
     return(
     <div className='sidenav' > 
-        <Pane title='Denky' img='/static/defavatar.png' />
+        <Pane title={nickname} img='/static/defavatar.png' />
         <SearchField />
         <ChatList />
         <style jsx>{`

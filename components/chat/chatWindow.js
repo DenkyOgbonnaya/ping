@@ -1,19 +1,38 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import MessageField from './messageField';
 import Messages from './messages';
 import HeaderPane from '../includes/headerPane';
+import useChatContext from '../lib/useChatContext';
+import chatActions from '../../actions/chatActions';
+import {registerMessageHandler, unregisterMessageHandler} from '../../actions/socket';
 
 const ChatWindow = () => {
+    const{chatData} = useChatContext();
+    const{sendMessage, handleRecievedMessage} = chatActions();
+
+    const{selectedRoom} = chatData;
+
+    useEffect( () => {
+        registerMessageHandler(handleRecievedMessage);
+
+        return () => {
+            unregisterMessageHandler();
+        }
+    }, []);
+
+    const handleSendMessage = message => {
+        sendMessage(message, selectedRoom.name);
+    }
     return (
         <div className='chat-window'> 
             <div className='title'> 
-                <HeaderPane title='General' img='static/defavatar.png' />
+                <HeaderPane title={selectedRoom.name} img='static/defavatar.png' />
             </div>
             <div className='message-list'> 
                 <Messages  />
             </div>
             <div className='message-field' >
-                <MessageField />
+                <MessageField handleSend = {handleSendMessage} />
             </div>
             <style jsx>{`
                 .chat-window {

@@ -1,7 +1,8 @@
-const LoginForm = ({setNickname, setPassword, handleLogin}) => {
+const LoginForm = ({setNickname, setPassword, handleLogin, isLoading, err}) => {
    
     return (
         <div className='container' > 
+            {err && <span> {err} </span>}
             <form onSubmit={handleLogin} > 
                 <div className='form-group' > 
                     <label htmlFor='username'> nickname </label>

@@ -11,7 +11,6 @@ const Spinner = () => {
                 }
                 .spinner > div {
                     display: inline-block;
-                    margin-top: 50%;
                 }
             `}</style>
         </div>

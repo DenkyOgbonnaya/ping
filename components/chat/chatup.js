@@ -1,14 +1,17 @@
-import React, {useState, useContext} from 'react';
-import io from 'socket.io-client';
+import React, {useState, useEffect} from 'react';
 import SideNav from '../includes/sideNav';
 import Main from './main';
-import { ChatContext } from '../../context/chatContext';
+import chatActions from '../../actions/chatActions';
+import useChatConText from '../lib/useChatContext';
 
 const Chatup = () => {
-    const{chatData} = useContext(ChatContext);
+    const{chatData} = useChatConText();
+    const{getRooms} = chatActions();
 
     const{isVisibleSidebar} = chatData;
-
+    useEffect( () => {
+        getRooms();
+    }, [])
     return (
         <div className='wrapper' > 
             

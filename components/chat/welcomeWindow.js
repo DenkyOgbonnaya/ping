@@ -4,7 +4,7 @@ import HeaderPane from '../includes/headerPane';
 const WelcomeWindow = () => {
     return(
         <div> 
-            <HeaderPane title='CHAT UP' />
+            <HeaderPane title='Ping' />
             <p>Welcome to Chatup instant messanger!. Join a room to start ChattIng. </p>
 
             <style jsx>{`

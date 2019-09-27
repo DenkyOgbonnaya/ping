@@ -1,26 +1,29 @@
-import React, {useContext} from 'react';
-import { ChatContext } from '../../context/chatContext';
-import { setRoomSelected, toggleIsVisibleSidebar } from '../../actions/chatActions';
+import React from 'react';
+import chatActions from '../../actions/chatActions';
+import useChatConText from '../lib/useChatContext';
 
 const ChatList = () => {
-    const{chatData, dispatchChat} = useContext(ChatContext);
-    const{chatRooms} = chatData;
+    const{chatData} = useChatConText();
+    const{chatrooms} = chatData;
+    const{setRoomSelected, toggleIsVisibleSidebar} = chatActions();
 
-    const handleChatClicked = chatroom => {
-        setRoomSelected(chatroom, dispatchChat);
-        toggleIsVisibleSidebar(dispatchChat);
+    const handleChatClicked = chatroomId => {
+        setRoomSelected(chatroomId);
+        toggleIsVisibleSidebar();
     }
+    if(chatrooms.length === 0)
+        return <div> No Chat rooms </div>
     return(
         <div> 
             <ul className='nav flex-column nav-pills' > 
             {
-                chatRooms.map((chatroom, i) => 
-                    <div key={i}>
+                chatrooms.map((chatroom) => 
+                    <div key={chatroom._id}>
                     <li 
                         className='nav-item' 
-                        onClick = {e => handleChatClicked(chatroom)} >
+                        onClick = {e => handleChatClicked(chatroom._id)} >
                         <img src='static/defavatar.png' alt='pIX' /> {" "}
-                        {chatroom} 
+                        {chatroom.name} 
                     </li>
                     <hr />
                     </div>

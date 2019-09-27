@@ -1,39 +1,13 @@
-import React, {useState, useContext} from "react";
-import { ChatContext } from "../../context/chatContext";
-import { AuthContext } from "../../context/authContext";
+import React, {useState} from "react";
+import useChatConText from "../lib/useChatContext";
+import useAuthConText from "../lib/useAuthContext";
 
 const Messages = () => {
-    const{chatData} = useContext(ChatContext);
-    const{authData} = useContext(AuthContext);
+    const{chatData} = useChatConText();
+    const{authData} = useAuthConText();
 
     const{selectedRoom} = chatData;
-    const{currentUser} = authData;
-    
-    const displayMessage = message => {
-        if(message.sender === currentUser.nickname)
-            return (
-            <li className='user' > 
-                <div> 
-                    <div className='text'> {message.text} <small> 9:50 </small> </div>
-                </div>
-            </li> )
-        else if(message.sender !== currentUser.nickname)
-            return(
-                <li className='participant' > 
-                    <div> 
-                        <p> {message.sender} </p>
-                        <div className='text'> {message.text} <small> 9:50 </small> </div>
-                                        
-                    </div>
-                </li>
-            )
-        else
-        return (
-            <li className='event' > 
-                    <p> mike left </p>
-            </li>
-        )
-    }
+    const{nickname} = authData;
     
     return (
         <div> 
@@ -41,20 +15,20 @@ const Messages = () => {
                 <p className='date'> <small className='text-muted' >{new Date().toDateString()} </small> </p>
                 <ul className = 'message-list' > 
                     {
-                        selectedRoom.chatHistory.map(message => 
+                       selectedRoom.messages.map(message => 
                             <div key= {message._id} className='message' >
                                 { 
-                                    message.sender === currentUser.nickname ?
+                                    message.sender === nickname ?
                                     <li className='user' > 
                                         <div> 
-                                        <div className='text'> {message.text} <small> 9:50 </small> </div>
+                                        <div className='text'> {message.text} {"  "} <small className='user-time' > 9:50 </small> </div>
                                         </div>
                                     </li> :
-                                        message.sender === 'Jennis' ? <li className='event' > <small className='text-muted' > {message.text} </small> </li> :
+                                        message.sender === 'log' ? <li className='log' > <small className='text-muted' > {message.text} </small> </li> :
                                     <li className='participant' > 
                                         <div> 
                                             <p> {message.sender} </p>
-                                            <div className='text'> {message.text} <small> 9:50 </small> </div>
+                                            <div className='text'> {message.text} <small className='participant-time'> 9:50 </small> </div>
                                                         
                                         </div>
                                     </li>
@@ -69,7 +43,8 @@ const Messages = () => {
                 .message-list {
                     display:flex;
                     flex-direction: column;
-                    list-style: none
+                    list-style: none;
+                    width: 100%
                 }
                 .user {
                     float: right;
@@ -84,10 +59,10 @@ const Messages = () => {
                     background: #eceff1;
                     color: #212121;;
                     max-width: 80%;
-                    border-radius:0px 20px 10px 20px;
+                    border-radius: 0px 20px 10px 20px;
                     padding: 10px;
                 }
-                .event {
+                .log {
                     text-align: center;
                 }
                 .message {
@@ -98,6 +73,14 @@ const Messages = () => {
                 }
                 .text {
                     display: flex:
+                }
+                .user-time {
+                    margin-left: 5px;
+                    color: #ccc
+                }
+                .participant-time {
+                    margin-left: 5px;
+                    color: #424242;
                 }
             `} </style>
         </div>
