@@ -14,12 +14,16 @@ module.exports = () => {
         const chatroom = getChatroom(chatroomName);
         chatroom.members = chatroom.members.filter( member => member !== nickname);
     }
+    const isMember = (nickname, chatroomName) => {
+        return getChatroom(chatroomName).members.includes(nickname);
+    }
 
     return {
         getChatrooms,
         getChatroom,
         addMember,
         addMessage,
-        removeMember
+        removeMember,
+        isMember
     }
 }

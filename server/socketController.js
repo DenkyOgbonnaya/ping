@@ -3,6 +3,8 @@ const{
     handleGetChatrooms,
     handleJoinRoom,
     handleMessage,
+    handleTyping,
+    handleStopTyping,
     handleDisconnect
 } = require('./chatroomController')();
 const {constructMessage} = require('./helper')
@@ -22,5 +24,11 @@ module.exports = (socket) => {
     } )
     socket.on('disconnect', () => {
         handleDisconnect(socket);
+    })
+    socket.on('typing', chatroomName => {
+        handleTyping(socket, chatroomName);
+    })
+    socket.on('stopTyping', chatroomName => {
+        handleStopTyping(socket, chatroomName);
     })
 }

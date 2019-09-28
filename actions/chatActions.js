@@ -39,12 +39,22 @@ const chatActions = () => {
         sendMsg(message, chatroomName)
     }
     const handleRecievedMessage = (message, chatroomName) => {
-
             dispatch({
                 type: 'MESSAGE',
                 payload: {message, chatroomName}
             })
-        
+    }
+    const handleTyping = (message, chatroomName) => {
+        dispatch({
+            type: 'TYPING',
+            payload: {message, chatroomName}
+        })
+    }
+    const handleStopTyping = (message, chatroomName) => {
+        dispatch({
+            type: 'STOP_TYPING',
+            payload: {message, chatroomName}
+        })
     }
 
 return {
@@ -53,7 +63,9 @@ return {
     getRooms,
     joinRoom,
     sendMessage,
-    handleRecievedMessage
+    handleRecievedMessage,
+    handleTyping,
+    handleStopTyping
 }
 }
 export default chatActions;

@@ -4,19 +4,23 @@ import Messages from './messages';
 import HeaderPane from '../includes/headerPane';
 import useChatContext from '../lib/useChatContext';
 import chatActions from '../../actions/chatActions';
-import {registerMessageHandler, unregisterMessageHandler} from '../../actions/socket';
+import {registerMessageHandler, unregisterMessageHandler, registerTypingHandler, unregisterTypingHandler, unregisterStopTypingHandler, registerStopTypingHandler} from '../../actions/socket';
 
 const ChatWindow = () => {
     const{chatData} = useChatContext();
-    const{sendMessage, handleRecievedMessage} = chatActions();
+    const{sendMessage, handleRecievedMessage, handleTyping, handleStopTyping} = chatActions();
 
     const{selectedRoom} = chatData;
 
     useEffect( () => {
         registerMessageHandler(handleRecievedMessage);
+        registerTypingHandler(handleTyping);
+        registerStopTypingHandler(handleStopTyping);
 
         return () => {
             unregisterMessageHandler();
+            unregisterTypingHandler();
+            unregisterStopTypingHandler();
         }
     }, []);
 

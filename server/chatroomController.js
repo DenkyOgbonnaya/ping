@@ -3,7 +3,8 @@ const {
     getChatroom,
     getChatrooms,
     addMember,
-    removeMember
+    removeMember,
+    isMember
 } = require('./chatroomManager')();
 const {removeUser} = require('./clientController')()
 
@@ -34,12 +35,24 @@ const chatroomController = () => {
             }
         });
     }
+    const handleTyping = (socket, chatroomName ) => {
+        if(socket.nickname && isMember(socket.nickname, chatroomName)){
+            socket.broadcast.to(chatroomName).emit('typing', `${socket.nickname} is typing...`, chatroomName)
+        }
+    }
+    const handleStopTyping = (socket, chatroomName ) => {
+        if(socket.nickname && isMember(socket.nickname, chatroomName)){
+            socket.broadcast.to(chatroomName).emit('stopTyping', "", chatroomName)
+        }
+    }
 
     return {
         handleGetChatrooms,
         handleJoinRoom,
         handleMessage,
-        handleDisconnect
+        handleDisconnect,
+        handleTyping,
+        handleStopTyping
     }
 }
 

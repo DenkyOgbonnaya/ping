@@ -20,6 +20,7 @@ const chatrooms = [
         name: 'Artificial Inteligence',
         members: [],
         messages: [{_id: '949kkfj', sender: 'log', text: 'Welcome to Artificial Inteligence '}],
+        typingMessage: '',
         description: 'For all lovers of AI'
     }
 ]

@@ -1,3 +1,5 @@
+import { updateChatroomMessage, updateSelectedRoom } from "./helper";
+
 const chatReducer = (state, action) => {
     switch(action.type){
         case 'SELECTROOM': {
@@ -28,15 +30,24 @@ const chatReducer = (state, action) => {
         case 'MESSAGE' : 
             const{message, chatroomName} = action.payload;
 
-            const updatedChatrooms = state.chatrooms.map(room => room.name === chatroomName ?
-            Object.assign({}, room, {messages: room.messages.concat(message)}) : room)
-
-            const selectedRoom = updatedChatrooms.find( chatroom => chatroom.name === chatroomName);
-        return {
-            ...state,
-            chatrooms: updatedChatrooms,
-            selectedRoom
+            const updatedChatrooms = updateChatroomMessage(state, chatroomName, message);
+            const selectedRoom = updateSelectedRoom(state, updatedChatrooms, chatroomName);
+            return {
+                ...state,
+                chatrooms: updatedChatrooms,
+                selectedRoom
         }
+        case 'STOP_TYPING' :
+        case 'TYPING' : {
+            const{message, chatroomName} = action.payload;
+            if(state.selectedRoom.name !== chatroomName)
+                return state;
+            return {
+                ...state,
+                selectedRoom: Object.assign({}, state.selectedRoom, {typingMessage: message})
+            }
+        }
+        
         default: return state;
         
     }

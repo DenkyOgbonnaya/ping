@@ -8,6 +8,20 @@ import io from 'socket.io-client';
   export const unregisterMessageHandler = () => {
     socket.off('message')
   }
+  export const registerTypingHandler = (handleTyping) => {
+    socket.on('typing', handleTyping)
+  }
+
+  export const unregisterTypingHandler = () => {
+    socket.off('typing')
+  }
+  export const registerStopTypingHandler = (handleStopTyping) => {
+    socket.on('stopTyping', handleStopTyping);
+  }
+
+  export const unregisterStopTypingHandler = () => {
+    socket.off('stopTyping')
+  }
   
   
   socket.on('error', function (err) {
@@ -37,7 +51,12 @@ import io from 'socket.io-client';
   export const getAvailableUsers = (cb) => {
     socket.emit('availableUsers', null, cb)
   }
-  
+  export const typing = chatroomName => {
+    socket.emit('typing', chatroomName)
+  }
+  export const stopTyping = chatroomName => {
+    socket.emit('stopTyping', chatroomName)
+  }
   
   
 
