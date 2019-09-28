@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import MessageField from './messageField';
 import Messages from './messages';
 import HeaderPane from '../includes/headerPane';
@@ -8,6 +8,7 @@ import {registerMessageHandler, unregisterMessageHandler, registerTypingHandler,
 
 const ChatWindow = () => {
     const{chatData} = useChatContext();
+    const chatBottom = useRef(undefined);
     const{sendMessage, handleRecievedMessage, handleTyping, handleStopTyping} = chatActions();
 
     const{selectedRoom} = chatData;
@@ -23,6 +24,12 @@ const ChatWindow = () => {
             unregisterStopTypingHandler();
         }
     }, []);
+    useEffect( () => {
+        ( () => { 
+            //scroll to chatbottom
+            chatBottom.current && chatBottom.current.scrollIntoView({behavior: 'smooth'});
+        } )();
+    }, [selectedRoom.messages]);
 
     const handleSendMessage = message => {
         sendMessage(message, selectedRoom.name);
@@ -35,6 +42,7 @@ const ChatWindow = () => {
             <div className='message-list'> 
                 <Messages  />
             </div>
+            <span ref={chatBottom}> </span>
             <div className='message-field' >
                 <MessageField handleSend = {handleSendMessage} />
             </div>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import useChatConText from "../lib/useChatContext";
 import useAuthConText from "../lib/useAuthContext";
 
@@ -8,7 +8,7 @@ const Messages = () => {
 
     const{selectedRoom} = chatData;
     const{nickname} = authData;
-    
+
     return (
         <div> 
             <div className= 'messages'> 
