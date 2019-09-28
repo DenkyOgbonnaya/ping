@@ -50,12 +50,12 @@ const MessageField = ({handleSend}) => {
           <button onClick= {onSendClicked } className="btn btn-primary"  type="button" id="button-addon2">Send</button>
         </div>
         <style jsx>{`
-            input {
+            textarea {
                 border-radius: 10px;
                 background: #eceff1;
                 bottom: 0;
             }
-            input::placeholder {
+            textarea::placeholder {
                 color: #424242;
             }
         `}</style>

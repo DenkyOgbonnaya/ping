@@ -66,7 +66,7 @@ const Messages = () => {
                     text-align: center;
                 }
                 .message {
-                    margin-top: 20px
+                    margin-top: 5px
                 }
                 .date {
                     text-align: center;

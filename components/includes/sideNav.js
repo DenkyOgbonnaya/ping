@@ -15,7 +15,6 @@ const SideNav = () => {
             .sidenav {
                 padding: 5px;
                 background: #0048AA;
-                border-radius:0px 0 0 10px;
                 height:100vh;
                 color: #fafafa;
             }
