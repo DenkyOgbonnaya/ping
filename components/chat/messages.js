@@ -1,6 +1,8 @@
 import React from "react";
 import useChatConText from "../lib/useChatContext";
 import useAuthConText from "../lib/useAuthContext";
+import { formatTime } from "./helper";
+
 
 const Messages = () => {
     const{chatData} = useChatConText();
@@ -42,14 +44,14 @@ const Messages = () => {
                                     message.sender === nickname ?
                                     <li className='user' > 
                                         <div> 
-                                        <div className='text'> {message.text} {"  "} <small className='user-time' > 9:50 </small> </div>
+                                        <div className='text'> {message.text} {"  "} <small className='user-time' > {formatTime(message.time)} </small> </div>
                                         </div>
                                     </li> :
                                         message.sender === 'log' ? <li className='log' > <small className='text-muted' > {message.text} </small> </li> :
                                     <li className='participant' > 
                                         <div> 
-                                            <p style={{ color: `${getColor(message.sender)}` }}> {message.sender} </p>
-                                            <div className='text'> {message.text} <small className='participant-time'> 9:50 </small> </div>
+                                        <h6 className='participant-name' style={{ color: `${getColor(message.sender)}` }}> {message.sender} </h6>
+                                            <div className='text'> {message.text} <small className='participant-time'> {formatTime(message.time)} </small> </div>
                                                         
                                         </div>
                                     </li>
