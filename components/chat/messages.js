@@ -8,7 +8,28 @@ const Messages = () => {
 
     const{selectedRoom} = chatData;
     const{nickname} = authData;
-
+    const COLORS = [
+        "#e21400",
+        "#91580f",
+        "#f8a700",
+        "#f78b00",
+        "#58dc00",
+        "#287b00",
+        "#a8f07a",
+        "#4ae8c4",
+        "#3b88eb",
+        "#3824aa",
+        "#a700ff",
+        "#d300e7"
+      ];
+      const getColor = username => {
+        let hash = 7;
+        for (let i = 0; i < username.length; i++) {
+          hash = username.charCodeAt(i) + (hash << 5) - hash;
+        }
+        let index = Math.abs(hash % COLORS.length);
+        return COLORS[index];
+      };
     return (
         <div> 
             <div className= 'messages'> 
@@ -27,7 +48,7 @@ const Messages = () => {
                                         message.sender === 'log' ? <li className='log' > <small className='text-muted' > {message.text} </small> </li> :
                                     <li className='participant' > 
                                         <div> 
-                                            <p> {message.sender} </p>
+                                            <p style={{ color: `${getColor(message.sender)}` }}> {message.sender} </p>
                                             <div className='text'> {message.text} <small className='participant-time'> 9:50 </small> </div>
                                                         
                                         </div>
