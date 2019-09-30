@@ -4,12 +4,12 @@ import useChatContext from '../components/lib/useChatContext';
 
 
 const chatActions = () => {
-    const{dispatch} = useChatContext();
+    const{ chatData ,dispatch} = useChatContext();
 
-    const setRoomSelected = (chatroomId) => {
+    const setRoomSelected = chatroomName => {
         dispatch({
             type: 'SELECTROOM',
-            chatroomId
+            chatroomName
         })
     }  
     const toggleIsVisibleSidebar = () => {
@@ -39,10 +39,10 @@ const chatActions = () => {
         sendMsg(message, chatroomName)
     }
     const handleRecievedMessage = (message, chatroomName) => {
-            dispatch({
-                type: 'MESSAGE',
-                payload: {message, chatroomName}
-            })
+        dispatch({
+            type: 'MESSAGE',
+            payload: {message, chatroomName}
+        })
     }
     const handleTyping = (message, chatroomName) => {
         dispatch({

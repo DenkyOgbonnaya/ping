@@ -7,3 +7,7 @@ export const formatTime = time => {
     })
     return theTime.slice(10);
 }
+export const getLastMessage = chat => {
+    const lastMessageIndex = chat.messages.length-1;
+    return chat.messages[lastMessageIndex];
+}

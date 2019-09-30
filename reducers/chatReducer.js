@@ -1,11 +1,15 @@
-import { updateChatroomMessage, updateSelectedRoom } from "./helper";
+import { updateChatroomMessage, updateSelectedRoom, updateNotification, isSelectedRoom } from "./helper";
 
 const chatReducer = (state, action) => {
     switch(action.type){
         case 'SELECTROOM': {
-            const selectedRoom = state.chatrooms.find( chatroom => chatroom._id === action.chatroomId);
+            const{chatroomName} = action;
+            const updatedChatrooms = updateNotification(state, chatroomName, 0);
+            const selectedRoom = updatedChatrooms.find( chatroom => chatroom.name === chatroomName);
+            
             return {
                 ...state,
+                chatrooms: updatedChatrooms,
                 selectedRoom,
                 isRoomSelected: true
             }
@@ -29,8 +33,9 @@ const chatReducer = (state, action) => {
             }
         case 'MESSAGE' : 
             const{message, chatroomName} = action.payload;
+            const notification = isSelectedRoom(chatroomName, state.selectedRoom.name) ? 0 : 1;
 
-            const updatedChatrooms = updateChatroomMessage(state, chatroomName, message);
+            const updatedChatrooms = updateChatroomMessage(state, chatroomName, message, notification);
             const selectedRoom = updateSelectedRoom(state, updatedChatrooms, chatroomName);
             return {
                 ...state,
@@ -47,7 +52,7 @@ const chatReducer = (state, action) => {
                 selectedRoom: Object.assign({}, state.selectedRoom, {typingMessage: message})
             }
         }
-        
+
         default: return state;
         
     }

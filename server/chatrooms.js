@@ -6,6 +6,8 @@ const chatrooms = [
         name: 'General',
         members: [],
         messages: [{_id: '949kkfj', sender: 'log', text: 'Welcome to General'}],
+        typingMessage: '',
+        notifications: 0,
         description: 'This group is for all and sundary. you can talk about anything here'
     },
     {
@@ -13,6 +15,8 @@ const chatrooms = [
         name: 'Web Developers',
         members: [],
         messages: [{_id: '949kkfj', sender: 'log', text: 'Welcome to Web Developers'}],
+        typingMessage: '',
+        notifications: 0,
         description: 'This group is for web developers and discussion is strickly web development'
     },
     {
@@ -21,6 +25,7 @@ const chatrooms = [
         members: [],
         messages: [{_id: '949kkfj', sender: 'log', text: 'Welcome to Artificial Inteligence '}],
         typingMessage: '',
+        notifications: 0,
         description: 'For all lovers of AI'
     }
 ]
