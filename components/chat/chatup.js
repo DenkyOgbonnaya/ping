@@ -19,12 +19,16 @@ const Chatup = () => {
             <div className='main' > <Main /> </div>
                 
             <style jsx >{`
+                * {
+                    margin: 0;
+                }
                 .wrapper {
                     display: flex;
                     flex-direction: row;
                     height: 100%;
                     overflow: hidden;
                     background: #fafafa;
+                    margin: 0;
                 }
                 .sidebar-hidden {
                     flex: 0;

@@ -5,19 +5,21 @@ const JoinWindow = ({room, participants, description}) => {
     const{joinRoom} = chatActions();
 
     return (
-        <div className='join-window'> 
+        <div className='container join-window'> 
             <HeaderPane title={room} />
+            <br />
+            <div className='jumbotron'>
+            <div className='logo'>
+                <img src='static/cool_ic.png' alt='logo' />
+                <h3>Ping </h3>
+            </div>
             <p className='join'>Join the {room} chatroom, it has {participants} participants. </p>
             <p> {description} </p>
-            <button onClick= {() => joinRoom(room) } className='btn btn-primary' > Join </button>
-
+            <button onClick= {() => joinRoom(room) } className='btn btn-primary' > Join chat </button>
+            </div>
             <style jsx>{`
-                h1 {
-                    text-align: center;
-                    color:#424242;
-                }
                 .join {
-                    margin-top: 30%;
+                    margin-top: 10%;
                 }
                 p {
                     text-align: center;
@@ -26,6 +28,15 @@ const JoinWindow = ({room, participants, description}) => {
                 button {
                     margin:auto;
                     display: block;
+                }
+                h3 {
+                    color: #0048AA;
+                }
+                .logo > img {
+                    margin-left: 15px;
+                }
+                .jumbotron {
+                    background: #fafafa;
                 }
             `}</style>
         </div>

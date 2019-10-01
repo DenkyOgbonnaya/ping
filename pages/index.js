@@ -30,6 +30,11 @@ const App = () => {
                 <Chatup /> :
                 <Spinner />
             }
+            <style jsx>{`
+                * {
+                    margin: 0;
+                }
+            `} </style>
         </div>
     )
 

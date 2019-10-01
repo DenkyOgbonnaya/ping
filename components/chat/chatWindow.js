@@ -63,13 +63,14 @@ const ChatWindow = () => {
                 }
                 .message-field {
                     background: #ffffff;
-                    width: 99%;
+                    width: 100%;
                     position: fixed;
                     bottom: 0;
                 }
                 @media (min-width: 768px){
                     .message-field {
-                        width: 79%;
+                        width: 80%;
+                        margin: 0;
                     }
                 }
             `} </style>
