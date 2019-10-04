@@ -3,12 +3,30 @@ import SideNav from '../includes/sideNav';
 import Main from './main';
 import chatActions from '../../actions/chatActions';
 import useChatConText from '../lib/useChatContext';
+import { 
+    registerReconnecting, 
+    registerReconnect, 
+    registerUserDisconnect, 
+    registerReconnectError} from '../../actions/socket';
+import connectionActions from '../../actions/connectionActions';
 
 const Chatup = () => {
     const{chatData} = useChatConText();
     const{getRooms} = chatActions();
 
     const{isVisibleSidebar} = chatData;
+    const{ 
+        handleReconnecting, 
+        handleReconnect,
+        handleReconnectError
+    } = connectionActions()
+
+    useEffect( () => {
+        registerReconnecting(handleReconnecting);
+        registerReconnect(handleReconnect);
+        registerUserDisconnect(handleReconnectError);
+        registerReconnectError(handleReconnectError);
+    }, [])
     useEffect( () => {
         getRooms();
     }, [])

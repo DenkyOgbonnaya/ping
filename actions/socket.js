@@ -27,6 +27,20 @@ import io from 'socket.io-client';
   socket.on('error', function (err) {
     console.log('received socket error:')
   })
+export const registerReconnect = cb => {
+  socket.on("reconnect", cb);
+};
+
+export const registerReconnecting = cb => {
+  socket.on("reconnecting", cb);
+};
+
+export const registerUserDisconnect = cb => {
+  socket.on("disconnect", cb);
+};
+export const registerReconnectError = cb => {
+  socket.on("reconnect_error", cb);
+};
 
   export const register = (nickname, cb) => {
     socket.emit('register', nickname, cb)

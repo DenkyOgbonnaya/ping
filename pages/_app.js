@@ -2,6 +2,7 @@ import React from 'react';
 import App from 'next/app';
 import AuthContextProvider from '../context/authContext';
 import ChatContextProvider from '../context/chatContext';
+import ConnectionContextProvider from '../context/connectionContext';
 
 class ChatApp extends App {
     render() {
@@ -9,9 +10,11 @@ class ChatApp extends App {
     
         return (
             <AuthContextProvider>
-                <ChatContextProvider>
-                    <Component {...pageProps} />
-                </ChatContextProvider>
+                <ConnectionContextProvider>
+                    <ChatContextProvider>
+                        <Component {...pageProps} />
+                    </ChatContextProvider>
+                </ConnectionContextProvider>
             </AuthContextProvider >
         )
     }

@@ -1,4 +1,3 @@
-import rooms from "./chatroom";
 import { getChatrooms, join, sendMsg, handleReceivedMessage }  from "./socket";
 import useChatContext from '../components/lib/useChatContext';
 

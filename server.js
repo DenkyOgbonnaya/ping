@@ -11,8 +11,6 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler() //part of next config
 
 io.on('connection', socket => {
-    console.log(socket.id, 'connected');
-    socket.emit('conected', 'you are connected')
     socketController(socket);
 })
 nextApp.prepare().then(() => {
