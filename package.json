@@ -5,9 +5,9 @@
   "author": "Dennis Ogbonnaya",
   "license": "MIT",
   "scripts": {
-    "start": "next start -p $PORT",
-    "dev": "node server.js",
-    "build": "next dev",
+    "dev": "node server.js -p $PORT",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js -p $PORT",
     "heroku-postbuild": "yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,5 +24,9 @@
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
     "uuidv4": "^5.0.1"
+  },
+  "engines": {
+    "yarn": "1.19.1",
+    "node": "10.16.3"
   }
 }
