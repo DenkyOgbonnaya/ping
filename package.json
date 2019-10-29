@@ -5,9 +5,11 @@
   "author": "Dennis Ogbonnaya",
   "license": "MIT",
   "scripts": {
-    "start": "next",
+    "start": "next start -p $PORT",
     "dev": "node server.js",
-    "build": "next dev"
+    "build": "next dev",
+    "heroku-postbuild": "yarn run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
