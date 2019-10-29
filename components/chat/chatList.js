@@ -25,7 +25,7 @@ const ChatList = () => {
                     <li 
                         className='nav-item' 
                         onClick = {e => handleChatClicked(chatroom.name)} >
-                        <img src='static/defAvatar.png' alt='pIX' /> 
+                        <img src='static/group.png' alt='pIX' /> 
                         <span className='chatname'> {chatroom.name} </span>
                         {/*
                         { chatroom.members.includes(nickname) ? 

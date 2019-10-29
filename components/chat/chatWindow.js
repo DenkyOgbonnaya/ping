@@ -53,7 +53,7 @@ const ChatWindow = () => {
     return (
         <div className='chat-window'> 
             <div className='title'> 
-                <HeaderPane title={selectedRoom.name} img='static/defavatar.png' />
+                <HeaderPane title={selectedRoom.name} img='static/group.png' />
             </div>
             <div className='message-list'> 
                 <Messages  />

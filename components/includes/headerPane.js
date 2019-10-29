@@ -22,8 +22,8 @@ const HeaderPane = ({title, img}) => {
                 <span className='title-span'>
                     {img && <img style={avatarStyle}  src={img} />   }
                     <span style={titleStyle} >{title.slice(0, 15)} </span> 
-        {selectedRoom.members.includes(currentUser.nickname) && <span onClick = {() => leaveRoom(selectedRoom.name)} style={{cursor: 'pointer', color:'#212121'}} className='leave'>X</span> }
-                    {selectedRoom.typingMessage && <span style= {{color: '#424242'}}> <em> {selectedRoom.typingMessage} </em> </span> } 
+                    {selectedRoom && selectedRoom.members.includes(currentUser.nickname) && <span onClick = {() => leaveRoom(selectedRoom.name)} style={{cursor: 'pointer', color:'#212121'}} className='leave'>X</span> }
+                    {selectedRoom && selectedRoom.typingMessage && <span style= {{color: '#424242'}}> <em> {selectedRoom.typingMessage} </em> </span> } 
                 </span>
             :
                 <span>

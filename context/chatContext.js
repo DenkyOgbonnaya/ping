@@ -8,7 +8,7 @@ const ChatContextProvider = (props) => {
         chatrooms: [],
         isRoomSelected: false,
         isVisibleSidebar: false,
-        selectedRoom: {}
+        selectedRoom: undefined
     })
 
     return (
