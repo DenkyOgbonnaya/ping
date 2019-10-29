@@ -1,4 +1,10 @@
-import { updateChatroomMessage, updateSelectedRoom, updateNotification, isSelectedRoom } from "./helper";
+import { 
+    updateChatroomMessage, 
+    updateSelectedRoom, 
+    updateNotification, 
+    isSelectedRoom,
+    removeUser
+ } from "./helper";
 
 const chatReducer = (state, action) => {
     switch(action.type){
@@ -51,6 +57,17 @@ const chatReducer = (state, action) => {
                 ...state,
                 selectedRoom: Object.assign({}, state.selectedRoom, {typingMessage: message})
             }
+        }
+        case 'LEAVE_ROOM' : {
+            const{chatroomName, nickName} = action.payload;
+            const updatedChatrooms = removeUser(state, chatroomName, nickName);
+            const selectedRoom = updateSelectedRoom(state, updatedChatrooms, chatroomName);
+            return {
+                ...state,
+                chatrooms: updatedChatrooms,
+                selectedRoom
+            }
+
         }
 
         default: return state;

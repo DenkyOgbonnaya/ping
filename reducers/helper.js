@@ -24,3 +24,9 @@ export const updateNotification = (state, chatroomName, value) => {
 export const isSelectedRoom = (chatroomName, selectedRoomName) => {
     return chatroomName === selectedRoomName;
 }
+export const removeUser = (state, chatroomName, nickName) => {
+    return state.chatrooms.map(room => room.name === chatroomName ?
+        Object.assign({}, room, {
+            members: room.members.filter(member => member !== nickName)
+        }) : room);
+}

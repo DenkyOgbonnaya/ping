@@ -35,7 +35,7 @@ const JoinWindow = ({room, participants, description}) => {
                 .logo > img {
                     margin-left: 15px;
                 }
-                .jumbotron {
+                .jumbotlron {
                     background: #fafafa;
                 }
             `}</style>

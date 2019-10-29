@@ -22,6 +22,13 @@ import io from 'socket.io-client';
   export const unregisterStopTypingHandler = () => {
     socket.off('stopTyping')
   }
+  export const registerLeaveRoom = (handleLeaveRoom) => {
+    socket.on('leaveRoom', handleLeaveRoom)
+  }
+
+  export const unregisterLeaveRoom = () => {
+    socket.off('leaveRoom')
+  }
   
   
   socket.on('error', function (err) {
@@ -71,7 +78,9 @@ export const registerReconnectError = cb => {
   export const stopTyping = chatroomName => {
     socket.emit('stopTyping', chatroomName)
   }
-  
+  export const leaveRoom = chatroomName => {
+    socket.emit('leaveRoom', chatroomName);
+  }
   
 
 

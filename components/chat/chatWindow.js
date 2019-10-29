@@ -4,12 +4,26 @@ import Messages from './messages';
 import HeaderPane from '../includes/headerPane';
 import useChatContext from '../lib/useChatContext';
 import chatActions from '../../actions/chatActions';
-import {registerMessageHandler, unregisterMessageHandler, registerTypingHandler, unregisterTypingHandler, unregisterStopTypingHandler, registerStopTypingHandler} from '../../actions/socket';
+import {
+    registerMessageHandler, 
+    unregisterMessageHandler, 
+    registerTypingHandler, 
+    unregisterTypingHandler, 
+    unregisterStopTypingHandler, 
+    registerStopTypingHandler,
+    registerLeaveRoom,
+    unregisterLeaveRoom
+} from '../../actions/socket';
 
 const ChatWindow = () => {
     const{chatData} = useChatContext();
     const chatBottom = useRef(undefined);
-    const{sendMessage, handleRecievedMessage, handleTyping, handleStopTyping} = chatActions();
+    const{sendMessage,
+         handleRecievedMessage, 
+         handleTyping, 
+         handleStopTyping,
+         handleLeaveRoom
+    } = chatActions();
 
     const{selectedRoom} = chatData;
 
@@ -17,11 +31,13 @@ const ChatWindow = () => {
         registerMessageHandler(handleRecievedMessage);
         registerTypingHandler(handleTyping);
         registerStopTypingHandler(handleStopTyping);
+        registerLeaveRoom(handleLeaveRoom);
 
         return () => {
             unregisterMessageHandler();
             unregisterTypingHandler();
             unregisterStopTypingHandler();
+            unregisterLeaveRoom();
         }
     }, []);
     useEffect( () => {

@@ -1,9 +1,11 @@
 import { getChatrooms, join, sendMsg, handleReceivedMessage }  from "./socket";
 import useChatContext from '../components/lib/useChatContext';
+import useAuthConText from "../components/lib/useAuthContext";
 
 
 const chatActions = () => {
     const{ chatData ,dispatch} = useChatContext();
+    const currentUser = useAuthConText().authData
 
     const setRoomSelected = chatroomName => {
         dispatch({
@@ -38,9 +40,17 @@ const chatActions = () => {
         sendMsg(message, chatroomName)
     }
     const handleRecievedMessage = (message, chatroomName) => {
+            dispatch({
+                type: 'MESSAGE',
+                payload: {message, chatroomName}
+            })
+    }
+    const handleLeaveRoom = (chatroomName, nickName, message) => {
+        handleRecievedMessage(message, chatroomName);
+        if(nickName === currentUser.nickname)
         dispatch({
-            type: 'MESSAGE',
-            payload: {message, chatroomName}
+            type: 'LEAVE_ROOM',
+            payload: {chatroomName, nickName}
         })
     }
     const handleTyping = (message, chatroomName) => {
@@ -64,7 +74,8 @@ return {
     sendMessage,
     handleRecievedMessage,
     handleTyping,
-    handleStopTyping
+    handleStopTyping,
+    handleLeaveRoom
 }
 }
 export default chatActions;
