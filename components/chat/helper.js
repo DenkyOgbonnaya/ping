@@ -5,9 +5,18 @@ export const formatTime = time => {
         minute: 'numeric',
         hour12: true
     })
-    return theTime.slice(10);
+    
+    return theTime.slice(12);
 }
 export const getLastMessage = chat => {
     const lastMessageIndex = chat.messages.length-1;
     return chat.messages[lastMessageIndex];
+}
+export const truncate = (string, isMobile)  => {
+    if(string && string.length <= 10)
+        return string;
+    if(isMobile && string && string.length > 10)
+    return `${string.slice(0, 10)}...`;
+
+    return string;
 }

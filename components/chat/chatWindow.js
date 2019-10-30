@@ -26,6 +26,7 @@ const ChatWindow = () => {
     } = chatActions();
 
     const{selectedRoom} = chatData;
+    const isMobile = window.matchMedia("(max-width: 765px)").matches;
 
     useEffect( () => {
         registerMessageHandler(handleRecievedMessage);
@@ -53,7 +54,7 @@ const ChatWindow = () => {
     return (
         <div className='chat-window'> 
             <div className='title'> 
-                <HeaderPane title={selectedRoom.name} img='static/group.png' />
+                <HeaderPane isMobile= {isMobile} title={selectedRoom.name} img='static/group.png' />
             </div>
             <div className='message-list'> 
                 <Messages  />

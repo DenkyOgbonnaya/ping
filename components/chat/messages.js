@@ -44,7 +44,7 @@ const Messages = () => {
                                     message.sender === nickname ?
                                     <li className='user' > 
                                         <div> 
-                                        <div className='text'> {message.text}  <small className='user-time' > {formatTime(message.time)} </small> </div>
+                                        <div className='text'> {message.text}<small className='user-time' > {formatTime(message.time)} </small> </div>
                                         </div>
                                     </li> :
                                         message.sender === 'log' ? <li className='log' > <small className='text-muted' > {message.text} </small> </li> :
@@ -67,7 +67,8 @@ const Messages = () => {
                     display:flex;
                     flex-direction: column;
                     list-style: none;
-                    width: 100%
+                    width: 100%;
+                    padding: 0
                 }
                 .user {
                     float: right;

@@ -4,8 +4,9 @@ import useChatConText from '../lib/useChatContext';
 import useConnectionContext from '../lib/useConnectionContext';
 import { leaveRoom } from '../../actions/socket';
 import useAuthConText from '../lib/useAuthContext';
+import { truncate } from '../chat/helper';
 
-const HeaderPane = ({title, img}) => {
+const HeaderPane = ({isMobile, title, img}) => {
     const {selectedRoom} = useChatConText().chatData;
     const currentUser = useAuthConText().authData;
     const {connected, message} = useConnectionContext().status;
@@ -21,7 +22,7 @@ const HeaderPane = ({title, img}) => {
             connected ?
                 <span className='title-span'>
                     {img && <img style={avatarStyle}  src={img} />   }
-                    <span style={titleStyle} >{title.slice(0, 15)} </span> 
+                    <span style={titleStyle} >{truncate(title, isMobile)} </span> 
                     {selectedRoom && selectedRoom.members.includes(currentUser.nickname) && <span data-toggle="tooltip" title='Leave room' onClick = {() => leaveRoom(selectedRoom.name)} style={{cursor: 'pointer', color:'#212121'}} className='leave'>X</span> }
                     {selectedRoom && selectedRoom.typingMessage && <span style= {{color: '#424242'}}> <em> {selectedRoom.typingMessage} </em> </span> } 
                 </span>

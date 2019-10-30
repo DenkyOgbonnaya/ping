@@ -6,7 +6,7 @@ const JoinWindow = ({room, participants, description}) => {
 
     return (
         <div className='container join-window'> 
-            <HeaderPane title={room} />
+            <HeaderPane isMobile={window.matchMedia("(max-width: 765px)").matches} title={room} />
             <br />
             <div className='jumbotron'>
             <div className='logo'>
