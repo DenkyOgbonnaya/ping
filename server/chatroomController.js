@@ -45,7 +45,7 @@ const chatroomController = () => {
             socket.broadcast.to(chatroomName).emit('stopTyping', "", chatroomName)
         }
     }
-    const handleLeaveRoom = (io, socket, chatroomName) => {
+    const handleLeaveRoom = (socket, chatroomName) => {
         if(socket.nickname && isMember(socket.nickname, chatroomName)){
             const message = constructMessage('log', `${socket.nickname} left`)
             socket.nsp.to(chatroomName).emit('leaveRoom', chatroomName, socket.nickname, message);

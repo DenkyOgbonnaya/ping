@@ -6,8 +6,7 @@ const clientController = () => {
     }
     const handleRegister = (socket, nickname, cb) => {
         if(userExist(nickname))
-            return cb(null, 'This nickname is taken');
-        
+            return cb(null, `Ooops! ${nickname} is taken.`);
         socket.nickname = nickname;
         clients.set(nickname, socket);
         return cb('err', nickname)
